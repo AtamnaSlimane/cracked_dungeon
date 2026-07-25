@@ -1,0 +1,3 @@
+/home/slimane/Projects/cracked_dungeon/build/CMakeFiles/dungeon.dir
+/home/slimane/Projects/cracked_dungeon/build/CMakeFiles/edit_cache.dir
+/home/slimane/Projects/cracked_dungeon/build/CMakeFiles/rebuild_cache.dir

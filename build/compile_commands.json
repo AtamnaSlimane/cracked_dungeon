@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/main.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/main.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/main.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/map.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/map.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/map.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/map.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/player.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/player.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/player.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/player.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/enemy.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/enemy.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/enemy.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/enemy.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/bullet.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/bullet.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/bullet.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/bullet.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/render.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/render.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/render.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/render.cpp.o"
+},
+{
+  "directory": "/home/slimane/Projects/cracked_dungeon/build",
+  "command": "/usr/bin/c++  -I/home/slimane/Projects/cracked_dungeon/include -std=gnu++17 -Wall -Wextra -o CMakeFiles/dungeon.dir/src/input.cpp.o -c /home/slimane/Projects/cracked_dungeon/src/input.cpp",
+  "file": "/home/slimane/Projects/cracked_dungeon/src/input.cpp",
+  "output": "CMakeFiles/dungeon.dir/src/input.cpp.o"
+}
+]
