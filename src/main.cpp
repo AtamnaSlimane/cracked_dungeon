@@ -21,14 +21,12 @@ int main() {
       input = getInput();
       if (input == 'f') {
         fireArrow();
-      } else if (input == 'a') {
-        attack();
       } else {
         movePlayer(input);
       }
     }
 
-    moveBullet();
+    moveBullets();
 
     if (playerHealth <= 0) {
       disableRawMode();

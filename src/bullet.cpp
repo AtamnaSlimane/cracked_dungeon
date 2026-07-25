@@ -2,41 +2,46 @@
 #include "config.h"
 #include "entities.h"
 
-void moveBullet() {
-  if (!bullet.on)
-    return;
+std::vector<Bullet> bullets;
 
-  switch (bullet.dir) {
-  case UP:
-    bullet.y--;
-    break;
-  case DOWN:
-    bullet.y++;
-    break;
-  case LEFT:
-    bullet.x--;
-    break;
-  case RIGHT:
-    bullet.x++;
-    break;
-  }
-
-  // hit wall?
-  if (dungeon[bullet.y][bullet.x] == '#') {
-    bullet.on = false;
-    return;
-  }
-
-  // hit enemy?
-  for (auto &e : enemies) {
-    if (!e.alive)
-      continue;
-    if (e.x == bullet.x && e.y == bullet.y) {
-      e.hp -= 5;
-      if (e.hp <= 0)
-        e.alive = false;
-      bullet.on = false;
-      return;
+void moveBullets() {
+  for (auto it = bullets.begin(); it != bullets.end();) {
+    switch (it->dir) {
+    case UP:
+      it->y--;
+      break;
+    case DOWN:
+      it->y++;
+      break;
+    case LEFT:
+      it->x--;
+      break;
+    case RIGHT:
+      it->x++;
+      break;
     }
+
+    bool remove = false;
+
+    if (dungeon[it->y][it->x] == '#') {
+      remove = true;
+    } else if (it->owner == PLAYER) {
+      for (auto &e : enemies) {
+        if (e.alive && e.x == it->x && e.y == it->y) {
+          e.hp -= 5;
+          if (e.hp <= 0)
+            e.alive = false;
+          remove = true;
+          break;
+        }
+      }
+    } else { // owner == ENEMY
+      if (it->x == playerX && it->y == playerY) {
+        playerHealth -= 8;
+        remove = true;
+      }
+    }
+
+    it = remove ? bullets.erase(it) : std::next(it);
   }
 }

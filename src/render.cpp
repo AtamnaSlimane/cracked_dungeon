@@ -18,8 +18,9 @@ void draw() {
       if (x == playerX && y == playerY)
         tile = '@';
 
-      if (bullet.on && x == bullet.x && y == bullet.y) {
-        tile = bullet.symbol;
+      for (auto &b : bullets) {
+        if (b.x == x && b.y == y)
+          tile = b.symbol;
       }
 
       std::cout << tile;
@@ -27,6 +28,6 @@ void draw() {
     std::cout << "\n";
   }
   std::cout << "Move: h/j/k/l   Fire: f   Health: " << playerHealth
-             << "   Quit: q \n";
+            << "   Quit: q \n";
   std::cout << std::flush;
 }
