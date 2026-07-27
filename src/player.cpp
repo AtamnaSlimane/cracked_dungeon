@@ -76,3 +76,4 @@ void heal() {
     playerHealth += 2;
   }
 }
+void fullHeal() { playerHealth = 1000000; }

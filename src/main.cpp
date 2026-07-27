@@ -5,7 +5,7 @@
 #include "input.h"
 #include "player.h"
 #include "render.h"
-
+#include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -16,8 +16,10 @@ int main() {
   char input = '\0';
   auto lastEnemyMove = std::chrono::steady_clock::now();
   auto lastHeal = std::chrono::steady_clock::now();
-
+  int level = 1;
+  loadLevel(level);
   while (true) {
+
     if (isKeyPressed()) {
       input = getInput();
       if (input == 'f') {
@@ -55,6 +57,18 @@ int main() {
     //   heal();
     // }
 
+    enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
+                                 [](const Enemy &e) { return e.hp <= 0; }),
+                  enemies.end());
+
+    std::cerr << "Enemies left: " << enemies.size() << '\n';
+
+    if (allDead()) {
+      fullHeal();
+      std::cout << "Loading level " << level << '\n';
+      loadLevel(level++);
+      std::cout << "Enemies spawned: " << enemies.size() << '\n';
+    }
     draw();
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }

@@ -8,7 +8,6 @@ enum Owner { PLAYER, ENEMY };
 struct Enemy {
   int x, y;
   char symbol;
-  bool alive;
   int hp;
   EnemyType type;
 };

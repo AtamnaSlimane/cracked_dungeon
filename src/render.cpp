@@ -10,7 +10,7 @@ void draw() {
       char tile = dungeon[y][x];
 
       for (auto &e : enemies) {
-        if (e.alive && e.x == x && e.y == y) {
+        if (e.x == x && e.y == y) {
           tile = '0' + e.hp;
         }
       }

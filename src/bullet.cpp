@@ -3,7 +3,7 @@
 #include "entities.h"
 
 std::vector<Bullet> bullets;
-
+int damage = 10;
 void moveBullets() {
   for (auto it = bullets.begin(); it != bullets.end();) {
     switch (it->dir) {
@@ -23,14 +23,14 @@ void moveBullets() {
 
     bool remove = false;
 
-    if (dungeon[it->y][it->x] == '#') {
+    if (it->x < 0 || it->x >= WIDTH || it->y < 0 || it->y >= HEIGHT) {
+      remove = true;
+    } else if (dungeon[it->y][it->x] == '#') {
       remove = true;
     } else if (it->owner == PLAYER) {
       for (auto &e : enemies) {
-        if (e.alive && e.x == it->x && e.y == it->y) {
-          e.hp -= 3;
-          if (e.hp <= 0)
-            e.alive = false;
+        if (e.x == it->x && e.y == it->y) {
+          e.hp -= damage;
           remove = true;
           break;
         }

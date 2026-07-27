@@ -2,26 +2,46 @@
 #include "config.h"
 #include "entities.h"
 #include <cmath>
-
-std::vector<Enemy> enemies = {
-    {5, 3, 'g', true, 9, MELEE},   // goblin
-    {15, 27, 'g', true, 9, MELEE}, // goblin
-    {20, 8, 'o', true, 7, ARCHER}, // orc
-    {30, 3, 'o', true, 7, ARCHER}  // orc
-};
+std::vector<Enemy> enemies;
 
 bool enemyAt(int x, int y) {
   for (const auto &e : enemies) {
-    if (e.alive && e.x == x && e.y == y)
+    if (e.x == x && e.y == y)
       return true;
   }
   return false;
 }
 
+std::pair<int, int> randomSpawn() {
+  int x, y;
+
+  do {
+    x = 1 + rand() % (WIDTH - 4);
+    y = 1 + rand() % (HEIGHT - 4);
+  } while (dungeon[y][x] == '#' || enemyAt(x, y) ||
+           (x == playerX && y == playerY));
+
+  return {x, y};
+}
+void loadLevel(int level) {
+  enemies.clear();
+
+  for (int i = 0; i < level + 1; ++i) {
+    auto [x, y] = randomSpawn();
+    enemies.push_back({x, y, 'g', 9, MELEE});
+  }
+
+  for (int i = 0; i < level; ++i) {
+    auto [x, y] = randomSpawn();
+    enemies.push_back({x, y, 'o', 7, ARCHER});
+  }
+}
+bool allDead() { return enemies.empty(); }
+bool inBounds(int x, int y) {
+  return x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT;
+}
 void moveEnemies() {
   for (auto &e : enemies) {
-    if (!e.alive)
-      continue;
 
     if (e.type == MELEE) {
       int newX = e.x;
@@ -46,7 +66,7 @@ void moveEnemies() {
       }
 
       // Check walls before moving
-      if (dungeon[newY][newX] != '#') {
+      if (inBounds(newX, newY) && dungeon[newY][newX] != '#') {
         e.x = newX;
         e.y = newY;
       }
@@ -71,7 +91,8 @@ void moveEnemies() {
           newX = e.x - 1;
       }
 
-      if (!enemyAt(newX, e.y) && dungeon[e.y][newX] != '#')
+      if (inBounds(newX, e.y) && !enemyAt(newX, e.y) &&
+          dungeon[e.y][newX] != '#')
         e.x = newX;
 
       // fire toward the player if roughly aligned on one axis
