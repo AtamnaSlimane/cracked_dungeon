@@ -69,4 +69,10 @@ void movePlayer(char input) {
 
 void fireArrow() { bullets.push_back({playerX, playerY, facing, PLAYER, '*'}); }
 
-void heal() { playerHealth += 2; }
+void heal() {
+  if (playerHealth == 100) {
+    return;
+  } else {
+    playerHealth += 2;
+  }
+}

@@ -6,7 +6,8 @@
 std::vector<Enemy> enemies = {
     {5, 3, 'g', true, 9, MELEE},   // goblin
     {15, 27, 'g', true, 9, MELEE}, // goblin
-    {20, 8, 'o', true, 7, ARCHER}  // orc
+    {20, 8, 'o', true, 7, ARCHER}, // orc
+    {30, 3, 'o', true, 7, ARCHER}  // orc
 };
 
 bool enemyAt(int x, int y) {

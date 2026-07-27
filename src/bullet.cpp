@@ -28,7 +28,7 @@ void moveBullets() {
     } else if (it->owner == PLAYER) {
       for (auto &e : enemies) {
         if (e.alive && e.x == it->x && e.y == it->y) {
-          e.hp -= 5;
+          e.hp -= 3;
           if (e.hp <= 0)
             e.alive = false;
           remove = true;
