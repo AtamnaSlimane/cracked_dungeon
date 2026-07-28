@@ -28,6 +28,7 @@ void draw() {
     std::cout << "\n";
   }
   std::cout << "Move: h/j/k/l   Fire: f   Health: " << playerHealth
-            << "   Quit: q \n";
+            << "  Damage: " << stats.playerDamage << "   Quit: q \n";
+  std::cout << "Enemies left: " << enemies.size() << '\n';
   std::cout << std::flush;
 }

@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-enum Direction { UP, DOWN, LEFT, RIGHT };
-enum EnemyType { MELEE, ARCHER };
-enum Owner { PLAYER, ENEMY };
+enum class Direction { Up, Down, Left, Right };
+enum class EnemyType { Melee, Archer };
+enum class Owner { Player, Enemy };
 
 struct Enemy {
   int x, y;
@@ -18,10 +18,18 @@ struct Bullet {
   Owner owner;
   char symbol;
 };
+
+struct CombatStats {
+  int playerDamage = 3;
+  int meleeEnemyDamage = 8;
+  int archerEnemyDamage = 5;
+};
 // Global game state. Declared here, defined once in a matching .cpp.
 extern int playerX;
 extern int playerY;
 extern int playerHealth;
+extern int playerMaxHealth;
 extern Direction facing;
 extern std::vector<Enemy> enemies;
 extern std::vector<Bullet> bullets;
+extern CombatStats stats;

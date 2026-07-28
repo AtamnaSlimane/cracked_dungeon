@@ -4,71 +4,97 @@
 #include "entities.h"
 #include "input.h"
 #include "player.h"
+#include "progression.h"
 #include "render.h"
+
 #include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <thread>
 
+namespace {
+using Clock = std::chrono::steady_clock;
+
+bool promptLevelUpChoice() {
+  std::cout << "\033[2J\033[H";
+  std::cout << "=== LEVEL COMPLETE ===\n\n";
+  std::cout << "1. Increase Health\n";
+  std::cout << "2. Increase Damage\n";
+
+  while (true) {
+    if (isKeyPressed()) {
+      switch (getInput()) {
+      case '1':
+        increaseMaxHealth();
+        return true;
+      case '2':
+        increaseDamage();
+        return true;
+      }
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+  }
+}
+
+void removeDeadEnemies() {
+  enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
+                               [](const Enemy &e) { return e.hp <= 0; }),
+                enemies.end());
+}
+} // namespace
+
 int main() {
   enableRawMode();
 
   char input = '\0';
-  auto lastEnemyMove = std::chrono::steady_clock::now();
-  auto lastHeal = std::chrono::steady_clock::now();
+  auto lastEnemyMove = Clock::now();
+  auto lastHeal = Clock::now();
   int level = 1;
   loadLevel(level);
-  while (true) {
 
+  while (true) {
     if (isKeyPressed()) {
       input = getInput();
-      if (input == 'f') {
+      if (input == 'f')
         fireArrow();
-      } else {
+      else
         movePlayer(input);
-      }
     }
 
     moveBullets();
 
     if (playerHealth <= 0) {
       disableRawMode();
-      std::cout << "youre dead" << std::endl;
+      std::cout << "you're dead" << std::endl;
       return 0;
     }
 
     if (input == 'q')
       break;
 
-    auto now = std::chrono::steady_clock::now();
-
+    auto now = Clock::now();
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
                                                               lastEnemyMove)
-            .count() >= 150) {
+            .count() >= ENEMY_MOVE_INTERVAL_MS) {
       moveEnemies();
       lastEnemyMove = now;
     }
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - lastHeal)
-            .count() >= 500) {
-      heal();
+            .count() >= PLAYER_HEAL_INTERVAL_MS) {
+      regenerateHealth();
       lastHeal = now;
     }
-    // if (elapsed >= 450) {
-    //   heal();
-    // }
 
-    enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
-                                 [](const Enemy &e) { return e.hp <= 0; }),
-                  enemies.end());
-
-    std::cerr << "Enemies left: " << enemies.size() << '\n';
+    removeDeadEnemies();
 
     if (allDead()) {
+      while (!promptLevelUpChoice()) {
+      }
+      level++;
+      loadLevel(level);
       fullHeal();
-      std::cout << "Loading level " << level << '\n';
-      loadLevel(level++);
-      std::cout << "Enemies spawned: " << enemies.size() << '\n';
     }
+
     draw();
     std::this_thread::sleep_for(std::chrono::milliseconds(10));
   }
