@@ -5,8 +5,8 @@ constexpr int WIDTH = 72;
 constexpr int HEIGHT = 30;
 
 // Enemy AI / regen timing (milliseconds).
-constexpr int ENEMY_MOVE_INTERVAL_MS = 150;
-constexpr int PLAYER_HEAL_INTERVAL_MS = 500;
+inline int ENEMY_MOVE_INTERVAL_MS = 150;
+// constexpr int PLAYER_HEAL_INTERVAL_MS = 500;
 constexpr int PLAYER_HEAL_AMOUNT = 2;
 
 // Archers try to hover within

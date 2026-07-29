@@ -90,6 +90,8 @@ bool enemyAt(int x, int y) {
   return false;
 }
 
+void increaseEnemySpeed() { ENEMY_MOVE_INTERVAL_MS -= 5; };
+
 void loadLevel(int level) {
   enemies.clear();
   for (int i = 0; i < level + 1; ++i) {

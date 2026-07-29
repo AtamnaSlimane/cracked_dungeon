@@ -18,9 +18,9 @@ using Clock = std::chrono::steady_clock;
 bool promptLevelUpChoice() {
   std::cout << "\033[2J\033[H";
   std::cout << "=== LEVEL COMPLETE ===\n\n";
-  std::cout << "1. Increase Health\n";
-  std::cout << "2. Increase Damage\n";
-  std::cout << "3. Increase Heal Speed\n";
+  std::cout << "1. Increase Health  By:50\n";
+  std::cout << "2. Increase Damage  By:1\n";
+  std::cout << "3. Increase Heal Speed  By:10ms\n";
 
   while (true) {
     if (isKeyPressed()) {
@@ -96,6 +96,7 @@ int main() {
       }
       level++;
       loadLevel(level);
+      increaseEnemySpeed();
       fullHeal();
     }
 
