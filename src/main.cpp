@@ -2,6 +2,7 @@
 #include "config.h"
 #include "enemy.h"
 #include "entities.h"
+#include "globals.h"
 #include "input.h"
 #include "player.h"
 #include "progression.h"
@@ -15,9 +16,13 @@
 namespace {
 using Clock = std::chrono::steady_clock;
 
-bool promptLevelUpChoice() {
+bool promptLevelUpChoice(int level) {
   std::cout << "\033[2J\033[H";
   std::cout << "=== LEVEL COMPLETE ===\n\n";
+  if (level % 5 == 0) {
+
+    std::cout << "NEXT IS BOSS LEVEL\n";
+  }
   std::cout << "1. Increase Health  By:50\n";
   std::cout << "2. Increase Damage  By:1\n";
   std::cout << "3. Increase Heal Speed  By:10ms\n";
@@ -47,13 +52,16 @@ void removeDeadEnemies() {
 }
 } // namespace
 
+// globals
+
+int level = 1;
+
 int main() {
   enableRawMode();
 
   char input = '\0';
   auto lastEnemyMove = Clock::now();
   auto lastHeal = Clock::now();
-  int level = 1;
   loadLevel(level);
 
   while (true) {
@@ -92,10 +100,15 @@ int main() {
     removeDeadEnemies();
 
     if (allDead()) {
-      while (!promptLevelUpChoice()) {
+      while (!promptLevelUpChoice(level + 1)) {
       }
       level++;
-      loadLevel(level);
+      if (level % 5 == 0) {
+
+        loadBoss(level / 5);
+      } else {
+        loadLevel(level);
+      }
       increaseEnemySpeed();
       fullHeal();
     }

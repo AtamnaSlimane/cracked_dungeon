@@ -1,6 +1,7 @@
 #include "render.h"
 #include "config.h"
 #include "entities.h"
+#include "globals.h"
 #include <iostream>
 
 void draw() {
@@ -11,7 +12,11 @@ void draw() {
 
       for (auto &e : enemies) {
         if (e.x == x && e.y == y) {
-          tile = '0' + e.hp;
+          if (e.hp < 10) {
+            tile = '0' + e.hp;
+          } else {
+            tile = e.symbol;
+          }
         }
       }
 
@@ -27,7 +32,8 @@ void draw() {
     }
     std::cout << "\n";
   }
-  std::cout << "Move: h/j/k/l   Fire: f   Health: " << playerHealth
+  std::cout << "Move: h/j/k/l   Fire: f    Level:  " << level
+            << "   Health: " << playerHealth
             << "  Damage: " << stats.playerDamage << "   Quit: q \n";
   std::cout << "Enemies left: " << enemies.size() << '\n';
   std::cout << "Heal speed: " << stats.playerHealInterval << '\n';

@@ -2,7 +2,7 @@
 #include <vector>
 
 enum class Direction { Up, Down, Left, Right };
-enum class EnemyType { Melee, Archer };
+enum class EnemyType { Melee, Archer, Boss };
 enum class Owner { Player, Enemy };
 
 struct Enemy {
@@ -23,7 +23,9 @@ struct CombatStats {
   int playerDamage = 3;
   int meleeEnemyDamage = 8;
   int archerEnemyDamage = 5;
+  int bossMeleeEnemyDamage = 20;
   int playerHealInterval = 500;
+  int gold;
 };
 // Global game state. Declared here, defined once in a matching .cpp.
 extern int playerX;

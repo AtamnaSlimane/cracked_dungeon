@@ -5,3 +5,4 @@ void moveEnemies();
 void loadLevel(int level);
 bool allDead();
 void increaseEnemySpeed();
+void loadBoss(int level);
