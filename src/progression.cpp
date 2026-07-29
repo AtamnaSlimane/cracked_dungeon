@@ -8,3 +8,5 @@ void increaseDamage() {
   stats.meleeEnemyDamage++;
   stats.archerEnemyDamage++;
 }
+
+void increaseHealthGenSpeed() { stats.playerHealInterval -= 10; }

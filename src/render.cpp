@@ -30,5 +30,6 @@ void draw() {
   std::cout << "Move: h/j/k/l   Fire: f   Health: " << playerHealth
             << "  Damage: " << stats.playerDamage << "   Quit: q \n";
   std::cout << "Enemies left: " << enemies.size() << '\n';
+  std::cout << "Heal speed: " << stats.playerHealInterval << '\n';
   std::cout << std::flush;
 }

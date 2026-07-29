@@ -23,6 +23,7 @@ struct CombatStats {
   int playerDamage = 3;
   int meleeEnemyDamage = 8;
   int archerEnemyDamage = 5;
+  int playerHealInterval = 500;
 };
 // Global game state. Declared here, defined once in a matching .cpp.
 extern int playerX;

@@ -20,6 +20,7 @@ bool promptLevelUpChoice() {
   std::cout << "=== LEVEL COMPLETE ===\n\n";
   std::cout << "1. Increase Health\n";
   std::cout << "2. Increase Damage\n";
+  std::cout << "3. Increase Heal Speed\n";
 
   while (true) {
     if (isKeyPressed()) {
@@ -29,6 +30,9 @@ bool promptLevelUpChoice() {
         return true;
       case '2':
         increaseDamage();
+        return true;
+      case '3':
+        increaseHealthGenSpeed();
         return true;
       }
     }
@@ -80,7 +84,7 @@ int main() {
       lastEnemyMove = now;
     }
     if (std::chrono::duration_cast<std::chrono::milliseconds>(now - lastHeal)
-            .count() >= PLAYER_HEAL_INTERVAL_MS) {
+            .count() >= stats.playerHealInterval) {
       regenerateHealth();
       lastHeal = now;
     }
