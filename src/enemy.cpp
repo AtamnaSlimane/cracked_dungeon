@@ -126,11 +126,11 @@ void loadLevel(int level) {
   enemies.clear();
   for (int i = 0; i < level + 1; ++i) {
     auto [x, y] = randomSpawn();
-    enemies.push_back({x, y, 'g', 9, 5 + level, EnemyType::Melee});
+    enemies.push_back({x, y, 'g', 9, 10 + level, EnemyType::Melee});
   }
   for (int i = 0; i < level; ++i) {
     auto [x, y] = randomSpawn();
-    enemies.push_back({x, y, 'o', 7, 8 + level, EnemyType::Archer});
+    enemies.push_back({x, y, 'o', 7, 15 + level, EnemyType::Archer});
   }
 }
 void loadBoss(int level) {
