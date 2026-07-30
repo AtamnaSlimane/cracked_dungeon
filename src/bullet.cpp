@@ -1,10 +1,9 @@
 #include "bullet.h"
 #include "config.h"
 #include "entities.h"
+#include "globals.h"
 
 #include <iterator>
-
-std::vector<Bullet> bullets;
 
 namespace {
 void step(Bullet &b) {

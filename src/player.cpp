@@ -2,15 +2,14 @@
 #include "config.h"
 #include "enemy.h"
 #include "entities.h"
+#include "globals.h"
 
 #include <utility>
 
 int playerX = WIDTH / 2;
 int playerY = HEIGHT / 2;
 int playerHealth = 100;
-int playerMaxHealth = 100;
 Direction playerFacing = Direction::Down;
-CombatStats stats;
 
 namespace {
 std::pair<int, int> tileInFront() {
@@ -85,3 +84,12 @@ void regenerateHealth() {
 }
 
 void fullHeal() { playerHealth = playerMaxHealth; }
+
+bool buy(int &gold, int cost) {
+  if (cost > gold) {
+    return false;
+  } else {
+    gold -= cost;
+    return true;
+  }
+}

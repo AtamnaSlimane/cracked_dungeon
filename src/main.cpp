@@ -4,6 +4,7 @@
 #include "entities.h"
 #include "globals.h"
 #include "input.h"
+#include "menu.h"
 #include "player.h"
 #include "progression.h"
 #include "render.h"
@@ -16,61 +17,51 @@
 namespace {
 using Clock = std::chrono::steady_clock;
 
-bool promptLevelUpChoice(int level) {
-  std::cout << "\033[2J\033[H";
-  std::cout << "=== LEVEL COMPLETE ===\n\n";
-  if (level % 5 == 0) {
-
-    std::cout << "NEXT IS BOSS LEVEL\n";
-  }
-  std::cout << "1. Increase Health  By:50\n";
-  std::cout << "2. Increase Damage  By:1\n";
-  std::cout << "3. Increase Heal Speed  By:10ms\n";
-
-  while (true) {
-    if (isKeyPressed()) {
-      switch (getInput()) {
-      case '1':
-        increaseMaxHealth();
-        return true;
-      case '2':
-        increaseDamage();
-        return true;
-      case '3':
-        increaseHealthGenSpeed();
-        return true;
-      }
-    }
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-  }
-}
-
 void removeDeadEnemies() {
-  enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
-                               [](const Enemy &e) { return e.hp <= 0; }),
-                enemies.end());
+  for (auto it = enemies.begin(); it != enemies.end();) {
+    if (it->hp <= 0) {
+      gold += it->goldReward;
+      it = enemies.erase(it);
+    } else {
+      ++it;
+    }
+  }
 }
 } // namespace
 
 // globals
-
-int level = 1;
 
 int main() {
   enableRawMode();
 
   char input = '\0';
   auto lastEnemyMove = Clock::now();
+  auto lastPlayerMove = Clock::now();
+  auto lastShot = Clock::now();
   auto lastHeal = Clock::now();
   loadLevel(level);
 
   while (true) {
     if (isKeyPressed()) {
       input = getInput();
-      if (input == 'f')
-        fireArrow();
-      else
+      auto now = Clock::now();
+      if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
+                                                                lastPlayerMove)
+              .count() >= stats.playermovementInterval) {
         movePlayer(input);
+        lastPlayerMove = now;
+      }
+
+      if (input == 'f') {
+        auto now = Clock::now();
+
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
+                                                                  lastShot)
+                .count() >= stats.playershootInterval) {
+          fireArrow();
+          lastShot = now;
+        }
+      }
     }
 
     moveBullets();

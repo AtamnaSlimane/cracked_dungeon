@@ -8,6 +8,7 @@ constexpr int HEIGHT = 30;
 inline int ENEMY_MOVE_INTERVAL_MS = 150;
 // constexpr int PLAYER_HEAL_INTERVAL_MS = 500;
 constexpr int PLAYER_HEAL_AMOUNT = 2;
+constexpr int BOSS_BASE_HEALTH = 500;
 
 // Archers try to hover within
 // [ARCHER_PREFERRED_RANGE, ARCHER_PREFERRED_RANGE + ARCHER_RANGE_BUFFER]

@@ -5,3 +5,4 @@ void fireArrow(); // ranged: spawns a bullet traveling in the facing direction
 void regenerateHealth();
 void fullHeal();
 void upgradeHealth();
+bool buy(int &gold, int cost);

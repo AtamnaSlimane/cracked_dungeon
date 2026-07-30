@@ -2,6 +2,7 @@
 #include "config.h"
 #include "entities.h"
 #include "globals.h"
+#include <algorithm>
 #include <iostream>
 
 void draw() {
@@ -38,5 +39,20 @@ void draw() {
   std::cout << "Enemies left: " << enemies.size() << '\n';
   std::cout << "Heal speed: " << stats.playerHealInterval << '\n';
   std::cout << "Enemy speed: " << ENEMY_MOVE_INTERVAL_MS << '\n';
+  std::cout << "gold : " << gold << '\n';
+  if (level % 5 == 0) {
+
+    const int BAR_WIDTH = 30;
+
+    int bossMaxHealth = BOSS_BASE_HEALTH * (level / 5);
+    int filled = enemies[0].hp * BAR_WIDTH / bossMaxHealth;
+
+    std::cout << "Boss: [";
+    for (int i = 0; i < BAR_WIDTH; i++) {
+      std::cout << (i < filled ? '=' : ' ');
+    }
+    std::cout << "] " << enemies[0].hp << "/" << bossMaxHealth << '\n';
+  }
+
   std::cout << std::flush;
 }

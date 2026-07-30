@@ -1,11 +1,10 @@
 #include "enemy.h"
 #include "config.h"
 #include "entities.h"
+#include "globals.h"
 
 #include <cmath>
 #include <random>
-
-std::vector<Enemy> enemies;
 
 namespace {
 std::mt19937 rng{std::random_device{}()};
@@ -127,17 +126,17 @@ void loadLevel(int level) {
   enemies.clear();
   for (int i = 0; i < level + 1; ++i) {
     auto [x, y] = randomSpawn();
-    enemies.push_back({x, y, 'g', 9, EnemyType::Melee});
+    enemies.push_back({x, y, 'g', 9, 5 + level, EnemyType::Melee});
   }
   for (int i = 0; i < level; ++i) {
     auto [x, y] = randomSpawn();
-    enemies.push_back({x, y, 'o', 7, EnemyType::Archer});
+    enemies.push_back({x, y, 'o', 7, 8 + level, EnemyType::Archer});
   }
 }
 void loadBoss(int level) {
   enemies.clear();
   auto [x, y] = randomSpawn();
-  enemies.push_back({x, y, 'O', 500 * level, EnemyType::Boss});
+  enemies.push_back({x, y, 'O', 500 * level, 100 * level, EnemyType::Boss});
 }
 bool allDead() { return enemies.empty(); }
 

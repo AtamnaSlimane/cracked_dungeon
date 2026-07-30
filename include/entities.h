@@ -9,6 +9,7 @@ struct Enemy {
   int x, y;
   char symbol;
   int hp;
+  int goldReward;
   EnemyType type;
 };
 
@@ -18,6 +19,13 @@ struct Bullet {
   Owner owner;
   char symbol;
 };
+struct Cost {
+  int damage = 40;
+  int maxHealth = 80;
+  int healSpeed = 20;
+  int fireSpeed = 30;
+  int moveSpeed = 30;
+};
 
 struct CombatStats {
   int playerDamage = 3;
@@ -25,14 +33,13 @@ struct CombatStats {
   int archerEnemyDamage = 5;
   int bossMeleeEnemyDamage = 20;
   int playerHealInterval = 500;
-  int gold;
+  int playershootInterval = 250;
+  int playermovementInterval = 50;
 };
+
 // Global game state. Declared here, defined once in a matching .cpp.
 extern int playerX;
 extern int playerY;
 extern int playerHealth;
 extern int playerMaxHealth;
 extern Direction facing;
-extern std::vector<Enemy> enemies;
-extern std::vector<Bullet> bullets;
-extern CombatStats stats;
