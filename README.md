@@ -29,7 +29,6 @@ keyboard input.
 
 - `h` / `j` / `k` / `l` — move
 - `f` — fire an arrow
-- `a` — melee attack
 - `q` — quit
 
 ## Structure
