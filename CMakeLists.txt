@@ -4,15 +4,12 @@ project(dungeon LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(dungeon
-    src/main.cpp
-    src/map.cpp
-    src/player.cpp
-    src/enemy.cpp
-    src/bullet.cpp
-    src/render.cpp
-    src/input.cpp
+
+file(GLOB SRC_FILES CONFIGURE_DEPENDS
+    src/*.cpp
 )
+
+add_executable(dungeon ${SRC_FILES})
 
 target_include_directories(dungeon PRIVATE include)
 
