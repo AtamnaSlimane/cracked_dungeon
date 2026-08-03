@@ -1,5 +1,6 @@
 #include "player.h"
 #include "config.h"
+#include "controls.h"
 #include "enemy.h"
 #include "entities.h"
 #include "globals.h"
@@ -31,27 +32,23 @@ void movePlayer(char input) {
   int newX = playerX;
   int newY = playerY;
 
-  switch (input) {
-  case 'k':
+  if (input == controls.up) {
     newY--;
     playerFacing = Direction::Up;
-    break;
-  case 'j':
+  } else if (input == controls.down) {
     newY++;
     playerFacing = Direction::Down;
-    break;
-  case 'h':
+  } else if (input == controls.left) {
     newX--;
     playerFacing = Direction::Left;
-    break;
-  case 'l':
+  } else if (input == controls.right) {
     newX++;
     playerFacing = Direction::Right;
-    break;
-  default:
-    return; // not a movement key
+  } else {
+    return;
   }
 
+  // Move if valid...
   // Bounds check added: the old version indexed dungeon[newY][newX]
   // straight away, which is only safe because the border is walled off.
   // Cheap insurance against future map edits removing that guarantee.

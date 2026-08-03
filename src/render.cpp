@@ -1,5 +1,6 @@
 #include "render.h"
 #include "config.h"
+#include "controls.h"
 #include "entities.h"
 #include "globals.h"
 #include <algorithm>
@@ -33,9 +34,12 @@ void draw() {
     }
     std::cout << "\n";
   }
-  std::cout << "Move: h/j/k/l   Fire: f    Level:  " << level
+  std::cout << "Move: " << controls.left << '/' << controls.down << '/'
+            << controls.up << '/' << controls.right
+            << "   Fire: " << controls.fire << "   Level: " << level
             << "   Health: " << playerHealth
-            << "  Damage: " << stats.playerDamage << "   Quit: q \n";
+            << "  Damage: " << stats.playerDamage << "   Quit: Q \n"
+            << '\n';
   std::cout << "Enemies left: " << enemies.size() << '\n';
   std::cout << "Heal speed: " << stats.playerHealInterval << '\n';
   std::cout << "Enemy speed: " << ENEMY_MOVE_INTERVAL_MS << '\n';

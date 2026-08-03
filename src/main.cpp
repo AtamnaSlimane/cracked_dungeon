@@ -1,5 +1,6 @@
 #include "bullet.h"
 #include "config.h"
+#include "controls.h"
 #include "enemy.h"
 #include "entities.h"
 #include "globals.h"
@@ -29,8 +30,6 @@ void removeDeadEnemies() {
 }
 } // namespace
 
-// globals
-
 int main() {
   enableRawMode();
 
@@ -39,6 +38,7 @@ int main() {
   auto lastPlayerMove = Clock::now();
   auto lastShot = Clock::now();
   auto lastHeal = Clock::now();
+  chooseControls();
   loadLevel(level);
 
   while (true) {
@@ -72,7 +72,7 @@ int main() {
       return 0;
     }
 
-    if (input == 'q')
+    if (input == 'Q')
       break;
 
     auto now = Clock::now();

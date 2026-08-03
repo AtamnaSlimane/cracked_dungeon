@@ -3,8 +3,10 @@
 #include "entities.h"
 #include "globals.h"
 
+#include <algorithm>
 #include <cmath>
 #include <random>
+#include <utility>
 
 namespace {
 std::mt19937 rng{std::random_device{}()};
@@ -120,7 +122,10 @@ bool enemyAt(int x, int y) {
   return false;
 }
 
-void increaseEnemySpeed() { ENEMY_MOVE_INTERVAL_MS -= 5; };
+void increaseEnemySpeed() {
+  ENEMY_MOVE_INTERVAL_MS -= 5;
+  ENEMY_MOVE_INTERVAL_MS = std::max(20, ENEMY_MOVE_INTERVAL_MS);
+};
 
 void loadLevel(int level) {
   enemies.clear();
