@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "controls.h"
 #include "globals.h"
 #include "input.h"
 #include "menu.h"
@@ -55,9 +56,10 @@ bool promptLevelUpChoice(int level) {
     if (stats.playermovementInterval == MIN_MOVE_INTERVAL)
       std::cout << "MAX\n";
     else
-      std::cout << cost.moveSpeed << "g\n";
+      std::cout << cost.moveSpeed << "g\n\n";
 
-    std::cout << "[Q] Continue\n\n";
+    std::cout << "[c] Change controls \n\n";
+    std::cout << "[q] Continue\n\n";
     std::cout << "=========================================\n";
     std::cout << message << '\n';
     std::cout << "=========================================\n";
@@ -143,7 +145,9 @@ bool promptLevelUpChoice(int level) {
         message = "Not enough gold!";
       }
       break;
-
+    case 'c':
+      chooseControls();
+      break;
     case 'q':
     case 'Q':
       return true;
