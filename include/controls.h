@@ -15,3 +15,5 @@ extern const Controls WasdControls;
 extern const Controls ZqsdControls;
 
 void chooseControls();
+void saveControls();
+bool loadControls();

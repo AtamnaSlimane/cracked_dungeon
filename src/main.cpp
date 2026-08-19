@@ -38,7 +38,9 @@ int main() {
   auto lastPlayerMove = Clock::now();
   auto lastShot = Clock::now();
   auto lastHeal = Clock::now();
-  chooseControls();
+  if (!loadControls()) {
+    chooseControls();
+  }
   loadLevel(level);
 
   while (true) {
