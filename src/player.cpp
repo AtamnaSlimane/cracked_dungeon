@@ -4,6 +4,8 @@
 #include "enemy.h"
 #include "entities.h"
 #include "globals.h"
+#include <chrono>
+#include <math.h>
 
 #include <utility>
 
@@ -74,7 +76,15 @@ void attack() {
     }
   }
 }
+void explosion() {
+  bullets.push_back({playerX, playerY, Direction::Up, Owner::Player, '*'});
 
+  bullets.push_back({playerX, playerY, Direction::Down, Owner::Player, '*'});
+
+  bullets.push_back({playerX, playerY, Direction::Left, Owner::Player, '*'});
+
+  bullets.push_back({playerX, playerY, Direction::Right, Owner::Player, '*'});
+}
 void regenerateHealth() {
   if (playerHealth < playerMaxHealth)
     playerHealth += PLAYER_HEAL_AMOUNT;

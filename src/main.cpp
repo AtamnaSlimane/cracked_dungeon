@@ -64,6 +64,17 @@ int main() {
           lastShot = now;
         }
       }
+      if (input == 'e') {
+
+        auto now = Clock::now();
+
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
+                                                                  lastShot)
+                .count() >= stats.playershootInterval) {
+          explosion();
+          lastShot = now;
+        }
+      }
     }
 
     moveBullets();

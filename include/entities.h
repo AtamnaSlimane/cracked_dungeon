@@ -1,4 +1,5 @@
 #pragma once
+#include <chrono>
 #include <vector>
 
 enum class Direction { Up, Down, Left, Right };
@@ -26,7 +27,13 @@ struct Cost {
   int fireSpeed = 30;
   int moveSpeed = 30;
 };
-
+struct Explosion {
+  int x;
+  int y;
+  int radius;
+  int duration;
+  std::chrono::steady_clock::time_point startTime;
+};
 struct CombatStats {
   int playerDamage = 3;
   int meleeEnemyDamage = 8;
