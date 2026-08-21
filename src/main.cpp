@@ -65,14 +65,15 @@ int main() {
         }
       }
       if (input == 'e') {
+        if (bombs > 0) {
+          auto now = Clock::now();
 
-        auto now = Clock::now();
-
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
-                                                                  lastShot)
-                .count() >= stats.playershootInterval) {
-          explosion();
-          lastShot = now;
+          if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
+                                                                    lastShot)
+                  .count() >= stats.playershootInterval) {
+            explosion(7, 5);
+            lastShot = now;
+          }
         }
       }
     }

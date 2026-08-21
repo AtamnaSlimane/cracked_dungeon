@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "controls.h"
+#include "entities.h"
 #include "globals.h"
 #include "input.h"
 #include "menu.h"
@@ -57,6 +58,8 @@ bool promptLevelUpChoice(int level) {
       std::cout << "MAX\n";
     else
       std::cout << cost.moveSpeed << "g\n\n";
+
+    std::cout << "[6] Bomb  ,current bombs: " << bombs << "\n\n";
 
     std::cout << "[c] Change controls \n\n";
     std::cout << "[q] Continue\n\n";
@@ -144,6 +147,16 @@ bool promptLevelUpChoice(int level) {
       } else {
         message = "Not enough gold!";
       }
+      break;
+
+    case '6':
+      if (buy(gold, cost.bomb)) {
+        message = "SUCCESS!\n";
+        bombs++;
+      } else {
+        message = "Not enough gold!";
+      }
+
       break;
     case 'c':
       chooseControls();

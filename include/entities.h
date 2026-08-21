@@ -26,14 +26,9 @@ struct Cost {
   int healSpeed = 20;
   int fireSpeed = 30;
   int moveSpeed = 30;
+  int bomb = 30;
 };
-struct Explosion {
-  int x;
-  int y;
-  int radius;
-  int duration;
-  std::chrono::steady_clock::time_point startTime;
-};
+
 struct CombatStats {
   int playerDamage = 3;
   int meleeEnemyDamage = 8;
@@ -49,4 +44,5 @@ extern int playerX;
 extern int playerY;
 extern int playerHealth;
 extern int playerMaxHealth;
+extern int bombs;
 extern Direction facing;

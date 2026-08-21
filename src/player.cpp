@@ -76,14 +76,16 @@ void attack() {
     }
   }
 }
-void explosion() {
-  bullets.push_back({playerX, playerY, Direction::Up, Owner::Player, '*'});
+void explosion(int radius, int damage) {
+  for (auto &enemy : enemies) {
+    int dx = std::abs(enemy.x - playerX);
+    int dy = std::abs(enemy.y - playerY);
 
-  bullets.push_back({playerX, playerY, Direction::Down, Owner::Player, '*'});
-
-  bullets.push_back({playerX, playerY, Direction::Left, Owner::Player, '*'});
-
-  bullets.push_back({playerX, playerY, Direction::Right, Owner::Player, '*'});
+    if (dx + dy <= radius) {
+      enemy.hp -= damage;
+    }
+  }
+  bombs--;
 }
 void regenerateHealth() {
   if (playerHealth < playerMaxHealth)

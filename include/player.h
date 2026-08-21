@@ -6,4 +6,4 @@ void regenerateHealth();
 void fullHeal();
 void upgradeHealth();
 bool buy(int &gold, int cost);
-void explosion();
+void explosion(int radius, int damage);
