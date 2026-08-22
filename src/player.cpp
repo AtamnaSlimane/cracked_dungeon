@@ -76,13 +76,13 @@ void attack() {
     }
   }
 }
-void explosion(int radius, int damage) {
+void explosion() {
   for (auto &enemy : enemies) {
     int dx = std::abs(enemy.x - playerX);
     int dy = std::abs(enemy.y - playerY);
 
-    if (dx + dy <= radius) {
-      enemy.hp -= damage;
+    if (dx + dy <= bomb_radius) {
+      enemy.hp -= bomb_damage;
     }
   }
   bombs--;

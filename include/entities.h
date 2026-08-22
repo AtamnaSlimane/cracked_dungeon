@@ -27,6 +27,8 @@ struct Cost {
   int fireSpeed = 30;
   int moveSpeed = 30;
   int bomb = 30;
+  int bomb_radius = 30;
+  int bomb_damage = 30;
 };
 
 struct CombatStats {

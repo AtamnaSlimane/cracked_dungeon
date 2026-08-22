@@ -71,7 +71,7 @@ int main() {
           if (std::chrono::duration_cast<std::chrono::milliseconds>(now -
                                                                     lastShot)
                   .count() >= stats.playershootInterval) {
-            explosion(7, 5);
+            explosion();
             lastShot = now;
           }
         }

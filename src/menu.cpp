@@ -59,8 +59,9 @@ bool promptLevelUpChoice(int level) {
     else
       std::cout << cost.moveSpeed << "g\n\n";
 
-    std::cout << "[6] Bomb  ,current bombs: " << bombs << "\n\n";
-
+    std::cout << "[6] Bomb  ,current bombs: " << bombs << "\n";
+    std::cout << "[7] Increase Bomb Radius  " << cost.bomb_radius << "g\n";
+    std::cout << "[8] Increase Bomb Damage  " << cost.bomb_damage << "g\n";
     std::cout << "[c] Change controls \n\n";
     std::cout << "[q] Continue\n\n";
     std::cout << "=========================================\n";
@@ -149,15 +150,49 @@ bool promptLevelUpChoice(int level) {
       }
       break;
 
-    case '6':
+    case '6': {
       if (buy(gold, cost.bomb)) {
-        message = "SUCCESS!\n";
+        int old = bombs;
         bombs++;
+
+        message = "SUCCESS! Bought +1 Bomb.\n"
+                  "Bombs: " +
+                  std::to_string(old) + " -> " + std::to_string(bombs);
       } else {
         message = "Not enough gold!";
       }
-
       break;
+    }
+
+    case '7':
+      if (bomb_radius >= MAX_BOMB_RADIUS) {
+        message = "Bomb Radius is already MAX!";
+      } else if (buy(gold, cost.bomb_radius)) {
+        int old = bomb_radius;
+        bomb_radius++;
+
+        message = "SUCCESS! Increased Bomb Radius.\n"
+                  "Radius: " +
+                  std::to_string(old) + " -> " + std::to_string(bomb_radius);
+      } else {
+        message = "Not enough gold!";
+      }
+      break;
+
+    case '8': {
+      if (buy(gold, cost.bomb_damage)) {
+        int old = bomb_damage;
+        bomb_damage++;
+
+        message = "SUCCESS! Increased Bomb Damage.\n"
+                  "Damage: " +
+                  std::to_string(old) + " -> " + std::to_string(bomb_damage);
+      } else {
+        message = "Not enough gold!";
+      }
+      break;
+    }
+
     case 'c':
       chooseControls();
       break;
