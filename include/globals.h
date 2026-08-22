@@ -4,7 +4,7 @@
 
 inline CombatStats stats;
 inline int level = 1;
-inline int gold = 100000;
+inline int gold = 0;
 inline Cost cost;
 inline int playerMaxHealth = 100;
 inline int explosionRadius = 7;
