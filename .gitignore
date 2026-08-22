@@ -29,3 +29,6 @@ perf.data*
 
 # clangd
 .cache/
+
+#others
+controls.cfg
