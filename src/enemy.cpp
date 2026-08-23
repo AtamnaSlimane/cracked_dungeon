@@ -141,7 +141,7 @@ void loadLevel(int level) {
 void loadBoss(int level) {
   enemies.clear();
   auto [x, y] = randomSpawn();
-  enemies.push_back({x, y, 'O', 500 * level, 100 * level, EnemyType::Boss});
+  enemies.push_back({x, y, 'O', 500 * level, 500 * level, EnemyType::Boss});
 }
 bool allDead() { return enemies.empty(); }
 

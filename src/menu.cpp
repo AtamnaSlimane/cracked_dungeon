@@ -59,8 +59,14 @@ bool promptLevelUpChoice(int level) {
     else
       std::cout << cost.moveSpeed << "g\n\n";
 
-    std::cout << "[6] Bomb  ,current bombs: " << bombs << "\n";
-    std::cout << "[7] Increase Bomb Radius  " << cost.bomb_radius << "g\n";
+    std::cout << "[6] Bomb   You Have: " << bombs << "\n";
+    std::cout << "[7] Increase Bomb Radius  ";
+    if (bomb_radius == MAX_BOMB_RADIUS) {
+      std::cout << "MAX\n";
+    } else {
+      std::cout << cost.bomb_radius << "g\n";
+    }
+
     std::cout << "[8] Increase Bomb Damage  " << cost.bomb_damage << "g\n";
     std::cout << "[c] Change controls \n\n";
     std::cout << "[q] Continue\n\n";
