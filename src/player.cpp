@@ -86,7 +86,14 @@ void explosion() {
     }
   }
   bombs--;
+
+  explosionRadius = bomb_radius; // flash matches the actual blast radius
+  explosionX = playerX;
+  explosionY = playerY;
+  explosionActive = true;
+  explosionStart = std::chrono::steady_clock::now();
 }
+
 void regenerateHealth() {
   if (playerHealth < playerMaxHealth)
     playerHealth += PLAYER_HEAL_AMOUNT;

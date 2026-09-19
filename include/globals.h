@@ -15,3 +15,8 @@ inline int bomb_damage = 3;
 
 inline std::vector<Enemy> enemies;
 inline std::vector<Bullet> bullets;
+
+inline bool explosionActive = false;
+inline int explosionX = 0;
+inline int explosionY = 0;
+inline std::chrono::steady_clock::time_point explosionStart;

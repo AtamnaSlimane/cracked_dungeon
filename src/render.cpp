@@ -8,6 +8,16 @@
 
 void draw() {
   std::cout << "\033[H";
+  bool showExplosion = false;
+  if (explosionActive) {
+    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+                       std::chrono::steady_clock::now() - explosionStart)
+                       .count();
+    if (elapsed < explosionDuration)
+      showExplosion = true;
+    else
+      explosionActive = false;
+  }
   for (int y = 0; y < HEIGHT; y++) {
     for (int x = 0; x < WIDTH; x++) {
       char tile = dungeon[y][x];
@@ -30,10 +40,21 @@ void draw() {
           tile = b.symbol;
       }
 
+      if (showExplosion) {
+        int dx = x - explosionX;
+        int dy = y - explosionY;
+        if (dx < 0)
+          dx = -dx;
+        if (dy < 0)
+          dy = -dy;
+        if (dx + dy <= explosionRadius)
+          tile = '#';
+      }
       std::cout << tile;
     }
     std::cout << "\n";
   }
+
   std::cout << "Move: " << controls.left << '/' << controls.down << '/'
             << controls.up << '/' << controls.right
             << "   Fire: " << controls.fire << "   Level: " << level
